@@ -16,3 +16,19 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
     axum::serve(listener, app).await.unwrap();
 }
+
+struct User {
+    id: u16,
+    location: Location,
+    forename: String,
+    surname: String,
+}
+
+struct Location {
+    lat: f32,
+    long: f32,
+}
+
+fn get_all_locations(users: Vec<User>) -> Vec<Location> {
+    return users.into_iter().map(|user| user.location).collect();
+}
